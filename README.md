@@ -3,8 +3,10 @@ El programa calcula el promedio final de estudiante e indica si aprueba la mater
 
 INSTRUCCIONES
 Desarrolle una interfaz gráfica que cumpla con las siguientes condiciones:
+
 • Cuando el programa arranque debe mostrar los elementos JTextField y JLabel para ingresar dos notas
 y el botón “Obtener nota”.
+
 • Cuando el usuario presiona el botón “Obtener nota” se debe:
 o Validar que los campos de notas estén llenos y que los valores estén entre 0.00 y 10.00, caso
 contrario se debe mostrar un mensaje de error (JOptionPane).
