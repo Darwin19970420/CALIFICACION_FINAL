@@ -11,6 +11,8 @@ public class frmPrincipal extends javax.swing.JFrame {
      */
     public frmPrincipal() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         btnReiniciar.setEnabled(false);
         txtSuma.setEditable(false);
         txtSupletorio.setEnabled(false);
@@ -127,10 +129,13 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblTitulo.setText("Registro de Notas");
 
+        lblBimestre1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblBimestre1.setText("Bimestre 1");
 
+        lblBimestre2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblBimestre2.setText("Bimestre 2");
 
         txtBimestre1.setText("0");
@@ -144,8 +149,10 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        lblSuma.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblSuma.setText("Suma :");
 
+        txtSuma.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtSuma.setText("0");
 
         btnObtenerNotaFinal.setText("Obtener nota Final");
@@ -155,15 +162,19 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        lblSupletorio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblSupletorio.setText("Supletorio");
 
         txtSupletorio.setText("0");
 
+        lblNotaFinal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNotaFinal.setText("Nota Final:");
 
+        txtNotaFinal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtNotaFinal.setText("0");
 
-        lblMensaje.setText("jLabel7");
+        lblMensaje.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblMensaje.setText(".............");
 
         btnReiniciar.setText("Reiniciar");
         btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -180,43 +191,43 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblBimestre2)
-                            .addComponent(lblBimestre1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnObtenerNota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtBimestre2)
-                                    .addComponent(txtBimestre1))))
-                        .addGap(127, 127, 127))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(lblMensaje)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(btnObtenerNotaFinal)
                         .addGap(19, 19, 19))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(82, 82, 82)
-                                .addComponent(btnReiniciar))
-                            .addComponent(lblSupletorio)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblNotaFinal)
-                                .addGap(30, 30, 30)
-                                .addComponent(txtNotaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblBimestre2)
+                            .addComponent(lblBimestre1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnObtenerNota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtBimestre2)
+                            .addComponent(txtBimestre1))
+                        .addGap(138, 138, 138))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnReiniciar)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblSupletorio)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblNotaFinal)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(txtNotaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(lblSuma)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtSupletorio, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                    .addComponent(txtSuma))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(lblSuma)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtSupletorio)
+                            .addComponent(txtSuma, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -251,7 +262,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addComponent(lblMensaje)
                 .addGap(18, 18, 18)
                 .addComponent(btnReiniciar)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
