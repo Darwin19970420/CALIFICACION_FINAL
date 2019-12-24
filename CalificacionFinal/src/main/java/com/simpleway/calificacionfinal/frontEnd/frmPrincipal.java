@@ -1,40 +1,104 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.simpleway.calificacionfinal.frontEnd;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Darwi
- */
 public class frmPrincipal extends javax.swing.JFrame {
 
+   double sumaObtenerNota = 0;
     /**
      * Creates new form frmPrincipal
      */
     public frmPrincipal() {
         initComponents();
+        btnReiniciar.setEnabled(false);
+        txtSuma.setEditable(false);
+        txtSupletorio.setEnabled(false);
+        btnObtenerNotaFinal.setEnabled(false);
+        txtNotaFinal.setEditable(false);
+    }
+    
+    private double calcularSupletorio(double notaTotal, double notaSupletorio){
+        return notaTotal + notaSupletorio;
+    }
+    private double validarSupletorio(){
+        String notaSupletorio = txtSupletorio.getText();
+        double notaTotalSupletorio = 0;
+        if(!notaSupletorio.isEmpty()){
+            double notaSupletorioNumerico = Double.parseDouble(notaSupletorio);
+            if(notaSupletorioNumerico >=0 && notaSupletorioNumerico <=20){
+                double notaTotalBimestres = Double.parseDouble(txtSuma.getText());
+                notaTotalSupletorio = calcularSupletorio(notaTotalBimestres, notaSupletorioNumerico);  
+                txtNotaFinal.setText(""+notaTotalSupletorio);
+                if(notaTotalSupletorio >= 24){        
+                    lblMensaje.setText("Aprobado");
+                }else{
+                    lblMensaje.setText("Reprobado");
+                }
+            }else{
+               JOptionPane.showMessageDialog(this, "La nota supletorio debe estar entre 0 y 20"); 
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "El campo supleotiro est vacio");
+        }
+        return notaTotalSupletorio;
+    }
+    
+    private String aprobado(double totalNotas){
+        String mensaje = "";
+        if(totalNotas>=14){
+            double notaFinal = totalNotas*2;
+            mensaje="Exonerado";
+            txtNotaFinal.setText(""+notaFinal);    
+        }else{  
+            txtSuma.setText(""+totalNotas);
+            habilitarCamposSupletorio();
+            validarSupletorio();
+        }
+        return  mensaje;
+    }
+    
+    private void habilitarCamposSupletorio(){
+        txtSupletorio.setEnabled(true);
+        btnObtenerNotaFinal.setEnabled(true);
+        btnObtenerNota.setEnabled(false);
+    }
+    
+    private void deshabilitarCamposNotas(){
+        txtBimestre1.setEnabled(false);
+        txtBimestre2.setEnabled(false);
+        btnReiniciar.setEnabled(true);
+    }
+    
+    private void reiniciar(){
+        txtBimestre1.setText("0");
+        txtBimestre2.setText("0");
+        txtBimestre1.setEnabled(true);
+        txtBimestre2.setEnabled(true);
+        btnObtenerNota.setEnabled(true);
+        txtSuma.setText("0");
+        txtSupletorio.setText("0");
+        txtNotaFinal.setText("0");
+        btnObtenerNotaFinal.setEnabled(false);
+        btnReiniciar.setEnabled(false);
+        txtSupletorio.setEnabled(false);
     }
     private double obtenerNotal(){
-        String notaB1 = txtBimestre1.getText().toString();
-        String notaB2 = txtBimestre2.getText().toString();
-        double sumaObtenerNota = 0;
+        String notaB1 = txtBimestre1.getText();
+        String notaB2 = txtBimestre2.getText();
         
         if(!notaB1.isEmpty() && !notaB2.isEmpty()){
             double notaBimestre1 = Double.parseDouble(notaB1);
             double notaBimestre2 = Double.parseDouble(notaB2);
             if((notaBimestre1 >= 0 && notaBimestre1 <=10 ) && (notaBimestre2 >=0 && notaBimestre2 <= 10)){
                 sumaObtenerNota = notaBimestre1 + notaBimestre2;
+                deshabilitarCamposNotas();
+                lblMensaje.setText(aprobado(sumaObtenerNota));
             }else{
-                System.err.println("entre 0 y 10");
+                JOptionPane.showMessageDialog(null, "LAS NOTAS DEBEN ESTAR ENTRE 0-10");
             }
         }else{
-            //JOptionPane.showMessageDialog(null, "LOS CAMPOS ESTAN VACIOS");
-            System.err.println("vacio");
+            JOptionPane.showMessageDialog(null, "LOS CAMPOS ESTAN VACIOS");
         }
         return sumaObtenerNota;
     }
@@ -69,9 +133,9 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         lblBimestre2.setText("Bimestre 2");
 
-        txtBimestre1.setText("jTextField1");
+        txtBimestre1.setText("0");
 
-        txtBimestre2.setText("jTextField2");
+        txtBimestre2.setText("0");
 
         btnObtenerNota.setText("Obtener nota");
         btnObtenerNota.addActionListener(new java.awt.event.ActionListener() {
@@ -82,32 +146,36 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         lblSuma.setText("Suma :");
 
-        txtSuma.setText("jTextField3");
+        txtSuma.setText("0");
 
         btnObtenerNotaFinal.setText("Obtener nota Final");
+        btnObtenerNotaFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObtenerNotaFinalActionPerformed(evt);
+            }
+        });
 
         lblSupletorio.setText("Supletorio");
 
-        txtSupletorio.setText("txtSupl");
+        txtSupletorio.setText("0");
 
         lblNotaFinal.setText("Nota Final:");
 
-        txtNotaFinal.setText("jTextField5");
+        txtNotaFinal.setText("0");
 
         lblMensaje.setText("jLabel7");
 
         btnReiniciar.setText("Reiniciar");
+        btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReiniciarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(lblSuma)
-                .addGap(18, 18, 18)
-                .addComponent(txtSuma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,35 +183,41 @@ public class frmPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblBimestre2)
                             .addComponent(lblBimestre1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtBimestre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtBimestre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnObtenerNota))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnObtenerNota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtBimestre2)
+                                    .addComponent(txtBimestre1))))
                         .addGap(127, 127, 127))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblMensaje)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lblSupletorio)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtSupletorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lblNotaFinal)
-                                    .addGap(30, 30, 30)
-                                    .addComponent(txtNotaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(107, 107, 107)
+                        .addComponent(lblMensaje)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnObtenerNotaFinal)
                         .addGap(19, 19, 19))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(btnReiniciar)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(82, 82, 82)
+                                .addComponent(btnReiniciar))
+                            .addComponent(lblSupletorio)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblNotaFinal)
+                                .addGap(30, 30, 30)
+                                .addComponent(txtNotaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(lblSuma)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtSupletorio, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                    .addComponent(txtSuma))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,8 +276,18 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnObtenerNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObtenerNotaActionPerformed
         // TODO add your handling code here:
-        obtenerNotal();
+        txtSuma.setText(""+obtenerNotal()); 
     }//GEN-LAST:event_btnObtenerNotaActionPerformed
+
+    private void btnObtenerNotaFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObtenerNotaFinalActionPerformed
+        // TODO add your handling code here:
+        aprobado(sumaObtenerNota);
+    }//GEN-LAST:event_btnObtenerNotaFinalActionPerformed
+
+    private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
+        // TODO add your handling code here:
+        reiniciar();
+    }//GEN-LAST:event_btnReiniciarActionPerformed
 
     /**
      * @param args the command line arguments
